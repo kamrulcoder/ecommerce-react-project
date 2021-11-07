@@ -60,6 +60,9 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
+
+          {/* color  select  */}
+
           <Select name="color" onChange={handleFilters}>
             <Option disabled>Color</Option>
             <Option>white</Option>
@@ -69,6 +72,8 @@ const ProductList = () => {
             <Option>yellow</Option>
             <Option>green</Option>
           </Select>
+
+          {/* product size  select  */}
           <Select name="size" onChange={handleFilters}>
             <Option disabled>Size</Option>
             <Option>XS</Option>
@@ -79,6 +84,8 @@ const ProductList = () => {
           </Select>
         </Filter>
         <Filter>
+
+          {/* product sort system  */}
           <FilterText>Sort Products:</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
             <Option value="newest">Newest</Option>
@@ -86,8 +93,12 @@ const ProductList = () => {
             <Option value="desc">Price (desc)</Option>
           </Select>
         </Filter>
+
       </FilterContainer>
+
+      {/* pass cat, filters  and sort  value  by props */}
       <Products cat={cat} filters={filters} sort={sort} />
+
       <Newsletter />
       <Footer />
     </Container>

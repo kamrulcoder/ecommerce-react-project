@@ -75,13 +75,79 @@ export default App;
 - catagory সিলেক্ট করলে সেই অনুযায়ী দেখতে হবে 
 - sort  সিলেক্ট করলে  সেই অনুযায়ী দেখানো লাগবে 
 
+![image not found ](./note-img/shop.gif)
+
 <details>
 <summary>Get Products  Code ......    </summary>
 
-```javascript 
+```javascript
+// product list  compoent  code 
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
+  const handleFilters = (e) => {
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+      [e.target.name]: value,
+    });
+  };
 
 ```
+```javascript 
+<Container>
+    <Navbar />
+      <Announcement />
+      <Title>{cat}</Title>
+      <FilterContainer>
+        <Filter>
+          <FilterText>Filter Products:</FilterText>
 
+          {/* color  select  */}
+
+          <Select name="color" onChange={handleFilters}>
+            <Option disabled>Color</Option>
+            <Option>white</Option>
+            <Option>black</Option>
+            <Option>red</Option>
+            <Option>blue</Option>
+            <Option>yellow</Option>
+            <Option>green</Option>
+          </Select>
+
+          {/* product size  select  */}
+          <Select name="size" onChange={handleFilters}>
+            <Option disabled>Size</Option>
+            <Option>XS</Option>
+            <Option>S</Option>
+            <Option>M</Option>
+            <Option>L</Option>
+            <Option>XL</Option>
+          </Select>
+        </Filter>
+        <Filter>
+
+          {/* product sort system  */}
+          <FilterText>Sort Products:</FilterText>
+          <Select onChange={(e) => setSort(e.target.value)}>
+            <Option value="newest">Newest</Option>
+            <Option value="asc">Price (asc)</Option>
+            <Option value="desc">Price (desc)</Option>
+          </Select>
+        </Filter>
+
+      </FilterContainer>
+
+      {/* pass cat, filters  and sort  value  by props */}
+      <Products cat={cat} filters={filters} sort={sort} />
+
+      <Newsletter />
+    <Footer />
+</Container>
+
+```
 
 
 </details>
